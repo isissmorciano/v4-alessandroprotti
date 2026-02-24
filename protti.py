@@ -128,13 +128,22 @@
 # 1. Definisci `salva_biblioteca(libri: list[dict], nome_file: str) -> None`:
 #    Salva la lista in formato JSON con indentazione. Stampa un messaggio di conferma.
 
-def salva_biblioteca(libri: list[dict], nome_file: str) -> None:
-    libri = { "titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943}
-    with open(nome_file, "w") as f:
+def salva_biblioteca(libri: list[dict], nome_file: str) -> None: #si
+    libri = [
+    {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+    {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+    {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+    {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+     ]
+   
+    try:
+        with open(nome_file, "w", encoding = "utf-8") as f:
         json.dump(libri, f, indent=4)
         print(f"File '{nome_file}' salvato con successo.")
+    except IOError as c:
+        print(f"errore durante la scrittura del file: {c}")
 
-def carica_biblioteca(nome_file: str) -> list[dict]:
+def carica_biblioteca(nome_file: str) -> list[dict]:  #si
     try:
         with open(nome_file, "r") as f:
             libri = json.load(f)
@@ -143,11 +152,9 @@ def carica_biblioteca(nome_file: str) -> list[dict]:
         print(f"Errore: Il file '{nome_file}' non esiste.")
         return []
 
-# 2. Definisci `carica_biblioteca(nome_file: str) -> list[dict]`:
-#    Carica e restituisce la lista da JSON.
-#    Se il file non esiste, stampa un messaggio di errore e restituisce `[]`.
 
-def salva_biblioteca(nome_file: str) -> list[dict]:
+
+def salva_biblioteca(nome_file: str) -> list[dict]:   #si
     Libro: []
     try:
         with open(nome_file, "w", encoding="utf-8") as file:
@@ -155,36 +162,64 @@ def salva_biblioteca(nome_file: str) -> list[dict]:
         print(f"File '{nome_file}' salvato con successo.")
     except IOError as e:
         print(f"Errore durante il salvataggio del file: {e}")
-def main()-> None:
+
+
+def main()-> None: #si
     libri = [
         {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
         {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
         {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
         {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
     ]
-    salva_biblioteca(libri, "biblioteca.json")
+    libri_salvati = salva_biblioteca(libri, "biblioteca.json")
     libri_caricati = carica_biblioteca("biblioteca.json")
     print(f"Libri in archivio: {len(libri_caricati)}")
 
 
 # b
 
-def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]:
+def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]: #si
     filtrati = []
     for libri in genere:
         if libro["genere"] == genere:
             filtrati.append(libri)
     return filtrati
 
+def main(): #si
+     libri = [
+        {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+        {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+        {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+        {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+    ]
 
+    salva_inventario(libri, nome_file)
+    prodotti_caricati = carica_inventario(nome_file)
+    if prodotti_caricati:
+        fantascienza = filtra_per_categoria(prodotti_caricati, "Fantascienza")
+        print(f"Prodotti fantascienza: {fantascienza}")
+   
+
+#c
 
 def calcola_media_anno(libri: list[dict]) -> float:
-    media = 0.0
-    if not libri:
-        return 0.0
-    somma = sum(libri["voto"] for studente in studenti)
-    return somma / len(studenti)
-
-#  1. Definisci `calcola_media_anno(libri: list[dict]) -> float`:
-# #    Restituisce la media degli anni di pubblicazione come `float`.
-# #    Se la lista è vuota, restituisce `0.0`.
+    libri = [
+        {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+        {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+        {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+        {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+    ]
+    somma_anni = 0.0
+    for libro in libri:
+        somma_anni += ["media"]
+        media_anni = somma_anni / len(libri)
+        print(f"Media libri : {media_anni:.2f}")
+        print()
+        if libri == "":
+            return 0.0
+    
+def trova_libro_piu_recente(libri: list[dict]) -> dict | None:
+    
+# 2. Definisci `trova_libro_piu_recente(libri: list[dict]) -> dict | None`:
+#    Restituisce il dizionario del libro con l'anno più alto.
+#    Se la lista è vuota, restituisce `None`.
