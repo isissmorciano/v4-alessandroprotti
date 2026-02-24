@@ -125,23 +125,15 @@
 # Inserisci titolo da modificare: Titanic
 # Libro 'Titanic' non trovato.
 
-# 1. Definisci `salva_biblioteca(libri: list[dict], nome_file: str) -> None`:
-#    Salva la lista in formato JSON con indentazione. Stampa un messaggio di conferma.
+import json
 
 def salva_biblioteca(libri: list[dict], nome_file: str) -> None: #si
-    libri = [
-    {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
-    {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
-    {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
-    {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
-     ]
-   
-    try:
+   try:
         with open(nome_file, "w", encoding = "utf-8") as f:
-        json.dump(libri, f, indent=4)
+            json.dump(libri, f, indent=4)
         print(f"File '{nome_file}' salvato con successo.")
-    except IOError as c:
-        print(f"errore durante la scrittura del file: {c}")
+    except IOError as e:
+        print(f"errore durante la scrittura del file: {e}")
 
 def carica_biblioteca(nome_file: str) -> list[dict]:  #si
     try:
@@ -219,7 +211,81 @@ def calcola_media_anno(libri: list[dict]) -> float:
             return 0.0
     
 def trova_libro_piu_recente(libri: list[dict]) -> dict | None:
+    recente = []
+    for libro in libri:
+        if libro["anno"] not in recente:
+            recente.append(libro["anno"])
+            return recente
+          
+def main():
+    media_anni = calcola_media_anno(libri: list[dict])
+    recentita_libro = trova_libro_piu_recente(libri: list[dict])
+    print(f"la media è {media_anni}")
+    print(f"la recentita del libro è {recentita_libro}")
+
+
+
+# ### Punto D – Conta libri per genere
+
+# 1. Definisci `conta_per_genere(libri: list[dict]) -> dict[str, int]`:
+#    Restituisce un dizionario dove le chiavi sono i generi e i valori sono il numero di libri per genere.
+def conta_per_genere(libri: list[dict]) -> dict[str, int]:
+    conteggio = {}
+    try:
+        with open(libri, "r", encoding="utf-8") as file:
+            contenuto = file.read().lower()
+            contenuto = contenuto.replace(".", "").replace(",", "")
+            parole = contenuto.split()
+            for genere in libri:
+                if genere in libri:
+                    libri[genere] += 1
+                else:
+                    libri[genere] = 1
+    except FileNotFoundError:
+        print(f"Errore: il file '{libri}' non è stato trovato.")
+    except IOError as e:
+        print(f"Errore durante la lettura del file: {e}")
+    return conteggio
+
+def main():
     
-# 2. Definisci `trova_libro_piu_recente(libri: list[dict]) -> dict | None`:
-#    Restituisce il dizionario del libro con l'anno più alto.
-#    Se la lista è vuota, restituisce `None`.
+
+# Nel `main()`:
+# - Chiama la funzione sui libri caricati.
+# - Stampa il risultato ordinato per genere (alfabetico).
+
+# **Esempio di output:**
+# ```
+# Libri per genere:
+# Fantasy: 1
+# Fantascienza: 2
+# Romanzo: 1
+# ```
+
+
+
+def modifica_anno_libromodifica_anno_libro(libri: list[dict], titolo: str, nuovo_anno: int) -> tuple[bool, str, list[dict]]:
+
+# ### Punto E – Bonus: Modifica anno di un libro 
+
+# Definisci `modifica_anno_libro(libri: list[dict], titolo: str, nuovo_anno: int) -> tuple[bool, str, list[dict]]`:
+# - Trova il libro con quel titolo (ricerca esatta) e aggiorna l'anno.
+# - Restituisce una tupla `(success, messaggio, libri_modificati)` dove `success` è `True` se il libro è stato trovato e modificato, altrimenti `False`. La lista modificata è sempre restituita.
+
+# Nel `main()`, dopo il Punto D:
+# - Chiedi all'utente un titolo e un nuovo anno.
+# - Chiama `modifica_anno_libro` e stampa il messaggio.
+# - Se la modifica è riuscita, richiama `salva_biblioteca` per salvare le modifiche su `"biblioteca.json"`.
+
+# **Esempio di interazione:**
+# ```
+# Inserisci titolo da modificare: 1984
+# Inserisci nuovo anno: 1950
+# Libro '1984' aggiornato con anno 1950. Totale libri: 4
+# ```
+
+# **Se il libro non esiste:**
+# ```
+# Inserisci titolo da modificare: Titanic
+# Libro 'Titanic' non trovato.
+
