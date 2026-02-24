@@ -127,7 +127,7 @@
 
 import json
 
-def salva_biblioteca(libri: list[dict], nome_file: str) -> None: #si
+def salva_biblioteca(libri: list[dict], nome_file: str) -> None: 
    try:
         with open(nome_file, "w", encoding = "utf-8") as f:
             json.dump(libri, f, indent=4)
@@ -135,7 +135,7 @@ def salva_biblioteca(libri: list[dict], nome_file: str) -> None: #si
     except IOError as e:
         print(f"errore durante la scrittura del file: {e}")
 
-def carica_biblioteca(nome_file: str) -> list[dict]:  #si
+def carica_biblioteca(nome_file: str) -> list[dict]:  
     try:
         with open(nome_file, "r") as f:
             libri = json.load(f)
@@ -146,7 +146,7 @@ def carica_biblioteca(nome_file: str) -> list[dict]:  #si
 
 
 
-def salva_biblioteca(nome_file: str) -> list[dict]:   #si
+def salva_biblioteca(nome_file: str) -> list[dict]:   
     Libro: []
     try:
         with open(nome_file, "w", encoding="utf-8") as file:
@@ -156,7 +156,7 @@ def salva_biblioteca(nome_file: str) -> list[dict]:   #si
         print(f"Errore durante il salvataggio del file: {e}")
 
 
-def main()-> None: #si
+def main()-> None: 
     libri = [
         {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
         {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
@@ -170,14 +170,14 @@ def main()-> None: #si
 
 # b
 
-def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]: #si
+def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]: 
     filtrati = []
     for libri in genere:
         if libro["genere"] == genere:
             filtrati.append(libri)
     return filtrati
 
-def main(): #si
+def main(): 
      libri = [
         {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
         {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
