@@ -124,8 +124,67 @@
 # ```
 # Inserisci titolo da modificare: Titanic
 # Libro 'Titanic' non trovato.
-```
+
+# 1. Definisci `salva_biblioteca(libri: list[dict], nome_file: str) -> None`:
+#    Salva la lista in formato JSON con indentazione. Stampa un messaggio di conferma.
+
 def salva_biblioteca(libri: list[dict], nome_file: str) -> None:
-    libri = {
-        
-    }
+    libri = { "titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943}
+    with open(nome_file, "w") as f:
+        json.dump(libri, f, indent=4)
+        print(f"File '{nome_file}' salvato con successo.")
+
+def carica_biblioteca(nome_file: str) -> list[dict]:
+    try:
+        with open(nome_file, "r") as f:
+            libri = json.load(f)
+            return libri
+    except FileNotFoundError:
+        print(f"Errore: Il file '{nome_file}' non esiste.")
+        return []
+
+# 2. Definisci `carica_biblioteca(nome_file: str) -> list[dict]`:
+#    Carica e restituisce la lista da JSON.
+#    Se il file non esiste, stampa un messaggio di errore e restituisce `[]`.
+
+def salva_biblioteca(nome_file: str) -> list[dict]:
+    Libro: []
+    try:
+        with open(nome_file, "w", encoding="utf-8") as file:
+            json.dump(libri, file, indent=4)
+        print(f"File '{nome_file}' salvato con successo.")
+    except IOError as e:
+        print(f"Errore durante il salvataggio del file: {e}")
+def main()-> None:
+    libri = [
+        {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+        {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+        {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+        {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+    ]
+    salva_biblioteca(libri, "biblioteca.json")
+    libri_caricati = carica_biblioteca("biblioteca.json")
+    print(f"Libri in archivio: {len(libri_caricati)}")
+
+
+# b
+
+def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]:
+    filtrati = []
+    for libri in genere:
+        if libro["genere"] == genere:
+            filtrati.append(libri)
+    return filtrati
+
+
+
+def calcola_media_anno(libri: list[dict]) -> float:
+    media = 0.0
+    if not libri:
+        return 0.0
+    somma = sum(libri["voto"] for studente in studenti)
+    return somma / len(studenti)
+
+#  1. Definisci `calcola_media_anno(libri: list[dict]) -> float`:
+# #    Restituisce la media degli anni di pubblicazione come `float`.
+# #    Se la lista è vuota, restituisce `0.0`.
